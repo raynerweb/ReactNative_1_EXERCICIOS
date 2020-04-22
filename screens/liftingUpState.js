@@ -5,28 +5,29 @@ export default class LiftingUpState extends Component {
     constructor(props) {
         super(props)
         this.onChangeText = this.onChangeText.bind(this);
-        this.farhenheit = 0;
-        this.celcius = 0;
-        // this.state = {
-        //     farhenheit: 0
-        // }
+        this.state = {
+            farhenheit: 0,
+            celcius: 0
+        }
     }
 
     onChangeText(event, scale) {
         if (scale === 'c') {
-            this.farhenheit = (event * 9 / 5) + 32
-            this.celcius = event
+            this.setState({ farhenheit: (event * 9 / 5) + 32 });
+            this.setState({ celcius: event });
         } else {
-            this.farhenheit = event;
-            this.celcius = (this.farhenheit - 32) * 5 / 9;
+            this.setState({ celcius: (event - 32) * 5 / 9 });
+            this.setState({ farhenheit: event });
         }
     }
 
     render() {
         return (
             <>
-                <Temperature scale="c" onChangeTemperature={this.onChangeText} temperature={this.celcius} />
-                <Temperature scale="f" onChangeTemperature={this.onChangeText} temperature={this.farhenheit} />
+                <Temperature scale="c" onChangeTemperature={this.onChangeText}
+                    temperature={this.state.celcius} />
+                <Temperature scale="f" onChangeTemperature={this.onChangeText}
+                    temperature={this.state.farhenheit} />
             </>
         );
     }
