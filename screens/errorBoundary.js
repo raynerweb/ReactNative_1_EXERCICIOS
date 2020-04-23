@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 
 /**
  * Criar componente de fallback que ao receber um erro do clique no botao, 
@@ -7,10 +7,7 @@ import { View, Button } from 'react-native';
  */
 
 class ErrorBoundary extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { hasError: false };
-    }
+    state = {hasError: false}
 
     static getDerivedStateFromError(error) {
         // Atualiza o state para que a próxima renderização mostre a UI alternativa.
@@ -27,8 +24,10 @@ class ErrorBoundary extends React.Component {
             return (
                 <Text>Erro</Text>
             );
+        } else {
+            return this.props.children;
         }
-        return this.props.children;
+        
     }
 }
 
